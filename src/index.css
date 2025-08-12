@@ -131,11 +131,13 @@ body {
 }
 
 .header__logo {
-  height: 3.5rem;
+  height: 5rem;
 }
 
 .header__logo img {
   height: 100%;
+  filter: brightness(0) invert(1);
+  
 }
 
 .nav {
@@ -384,7 +386,7 @@ body {
   align-items: center;
 }
 .header__logo img {
-  height: 3.5rem;
+  height: 5rem;
 }
 
 .section-header {
@@ -866,9 +868,10 @@ body {
   }
 }
 .footer__logo {
-  grid-row: 1 / 3;
+  grid-row: 1/ 3;
   -ms-flex-item-align: center;
   align-self: center;
+  height: 4r;
 }
 @media only screen and (max-width: 50em) {
   .footer__logo {
@@ -876,8 +879,8 @@ body {
   }
 }
 .footer__logo img {
-  height: 3rem;
-}
+  width:  20rem;
+} 
 .footer__nav {
   list-style: none;
   display: -webkit-box;
@@ -2000,5 +2003,220 @@ body {
   
   .user-view__form-container {
     padding: 0 2rem;
+  }
+}
+
+/* ====================================== */
+/* UPVOTE BUTTON STYLES                   */
+/* ====================================== */
+
+.card__upvote {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0.5rem 0;
+  position: relative;
+}
+
+.btn-upvote {
+  background: transparent;
+  border: 2px solid #ddd;
+  border-radius: 2rem;
+  padding: 0.6rem 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1.3rem;
+  color: #666;
+}
+
+.btn-upvote:hover {
+  border-color: #55c57a;
+  color: #55c57a;
+  background-color: rgba(85, 197, 122, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(85, 197, 122, 0.2);
+}
+
+.btn-upvote:active {
+  transform: translateY(0);
+}
+
+.btn-upvote:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-upvote--loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-upvote--liked {
+  border-color: #55c57a;
+  color: #55c57a;
+  background-color: rgba(85, 197, 122, 0.05);
+}
+
+.btn-upvote--liked:hover {
+  border-color: #55c57a;
+  color: #55c57a;
+  background-color: rgba(85, 197, 122, 0.1);
+  box-shadow: 0 0.5rem 1rem rgba(85, 197, 122, 0.2);
+}
+
+.upvote-icon {
+  height: 1.6rem;
+  width: 1.6rem;
+  fill: currentColor;
+  transition: all 0.3s;
+}
+
+.btn-upvote:hover .upvote-icon {
+  transform: scale(1.1);
+}
+
+.upvote-count {
+  font-weight: 600;
+  min-width: 2rem;
+  text-align: left;
+  font-size: 1.3rem;
+}
+
+.upvote-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ff4757;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  z-index: 10;
+  margin-top: 0.5rem;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive upvote button */
+@media only screen and (max-width: 37.5em) {
+  .btn-upvote {
+    padding: 0.4rem;
+    font-size: 1.2rem;
+  }
+  
+  .upvote-icon {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+  
+  .upvote-count {
+    font-size: 1.2rem;
+  }
+}
+
+/* ====================================== */
+/* WEATHER INFO STYLES                    */
+/* ====================================== */
+
+.card__data--weather {
+  grid-column: 1 / -1;
+  background-color: rgba(85, 197, 122, 0.03);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-left: 3px solid #55c57a;
+}
+
+.card__icon--weather {
+  fill: #55c57a;
+  margin-right: 1rem;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.weather-temp {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.weather-conditions {
+  font-size: 1.3rem;
+  color: #666;
+  text-transform: capitalize;
+}
+
+.weather-status {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.2rem 0.8rem;
+  border-radius: 1rem;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 0.3rem;
+  width: fit-content;
+}
+
+.weather-status.safe-for-travel,
+.weather-status.safe {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.weather-status.caution,
+.weather-status.moderate-risk {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.weather-status.unsafe,
+.weather-status.high-risk,
+.weather-status.dangerous {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.weather-loading {
+  color: #999;
+  font-style: italic;
+}
+
+.weather-unavailable {
+  color: #999;
+  font-style: italic;
+}
+
+/* Responsive weather styles */
+@media only screen and (max-width: 37.5em) {
+  .card__data--weather {
+    padding: 0.8rem;
+    margin-top: 0.3rem;
+  }
+  
+  .weather-temp {
+    font-size: 1.4rem;
+  }
+  
+  .weather-conditions {
+    font-size: 1.2rem;
+  }
+  
+  .weather-status {
+    font-size: 1.1rem;
+    padding: 0.2rem 0.6rem;
   }
 }

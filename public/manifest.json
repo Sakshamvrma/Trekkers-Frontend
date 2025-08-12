@@ -1,9 +1,9 @@
 {
-  "short_name": "Natours",
-  "name": "Natours - Exciting Tours for Adventurous People",
+  "short_name": "Trekkers",
+  "name": "Trekkers - Pack Your Bags!",
   "icons": [
     {
-      "src": "img/favicon.png",
+      "src": "img/logo-green-round.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     },

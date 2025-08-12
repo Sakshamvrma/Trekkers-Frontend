@@ -1,23 +1,29 @@
-import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import { authAPI } from '../services/api';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useCallback,
+} from "react";
+import axios from "axios";
+import { authAPI } from "../services/api";
 
 // Initial state
 const initialState = {
   user: null,
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem("token"),
   loading: true,
   error: null,
 };
 
 // Actions
 const authActions = {
-  SET_LOADING: 'SET_LOADING',
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGOUT: 'LOGOUT',
-  SET_ERROR: 'SET_ERROR',
-  CLEAR_ERROR: 'CLEAR_ERROR',
-  UPDATE_USER: 'UPDATE_USER',
+  SET_LOADING: "SET_LOADING",
+  LOGIN_SUCCESS: "LOGIN_SUCCESS",
+  LOGOUT: "LOGOUT",
+  SET_ERROR: "SET_ERROR",
+  CLEAR_ERROR: "CLEAR_ERROR",
+  UPDATE_USER: "UPDATE_USER",
 };
 
 // Reducer
@@ -76,23 +82,23 @@ export const AuthProvider = ({ children }) => {
   // Set up axios interceptor for token
   useEffect(() => {
     if (state.token) {
-      localStorage.setItem('token', state.token);
+      localStorage.setItem("token", state.token);
       // Add token to axios defaults
-      axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${state.token}`;
     } else {
-      localStorage.removeItem('token');
-      delete axios.defaults.headers.common['Authorization'];
+      localStorage.removeItem("token");
+      delete axios.defaults.headers.common["Authorization"];
     }
   }, [state.token]);
 
   // Check if user is logged in on app start
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (token) {
         try {
           // Set token in axios headers
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
           // Get current user
           const response = await authAPI.getCurrentUser();
@@ -104,8 +110,8 @@ export const AuthProvider = ({ children }) => {
             },
           });
         } catch (error) {
-          console.error('Auth check failed:', error);
-          localStorage.removeItem('token');
+          console.error("Auth check failed:", error);
+          localStorage.removeItem("token");
           dispatch({ type: authActions.LOGOUT });
         }
       } else {
@@ -135,7 +141,7 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Login failed';
+      const errorMessage = error.response?.data?.message || "Login failed";
       dispatch({
         type: authActions.SET_ERROR,
         payload: errorMessage,
@@ -163,7 +169,7 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Signup failed';
+      const errorMessage = error.response?.data?.message || "Signup failed";
       dispatch({
         type: authActions.SET_ERROR,
         payload: errorMessage,
@@ -174,6 +180,13 @@ export const AuthProvider = ({ children }) => {
 
   // Logout function
   const logout = () => {
+    // Clear localStorage
+    localStorage.removeItem("token");
+
+    // Clear axios default header
+    delete axios.defaults.headers.common["Authorization"];
+
+    // Dispatch logout action
     dispatch({ type: authActions.LOGOUT });
   };
 
@@ -190,7 +203,7 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Update failed';
+      const errorMessage = error.response?.data?.message || "Update failed";
       dispatch({
         type: authActions.SET_ERROR,
         payload: errorMessage,
@@ -220,7 +233,7 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

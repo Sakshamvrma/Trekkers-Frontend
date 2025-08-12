@@ -18,7 +18,7 @@ const Header = () => {
       </nav>
 
       <div className="header__logo">
-        <img src="/img/logo-white.png" alt="Natours logo" />
+        <img src="/img/logo-transparent-png.png" alt="Trekkers" />
       </div>
 
       <nav className="nav nav--user">
