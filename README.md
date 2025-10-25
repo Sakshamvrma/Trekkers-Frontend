@@ -51,4 +51,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - [@saksham_verma9](https://twitter.com/saksham_verma9) - sakshamvrma33@gmail.com
 
-Project Link: [https://github.com/yourusername/tour-and-travels](https://github.com/yourusername/tour-and-travels)
+Project Link: https://trekkers-frontend.vercel.app/
